@@ -13,7 +13,7 @@ const ChatPage = () => {
     roomId,
     currentUser,
     connected,
-    setConnected,
+    setConnected, 
     setRoomId,
     setCurrentUser,
   } = useChatContext();
