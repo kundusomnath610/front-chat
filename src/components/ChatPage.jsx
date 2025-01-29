@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MdAttachFile, MdSend } from "react-icons/md";
+import { MdAttachFile, MdSend, MdMic} from "react-icons/md";
 import useChatContext from "../context/ChatContext";
 import { useNavigate } from "react-router";
 import SockJS from "sockjs-client";
@@ -17,9 +17,9 @@ const ChatPage = () => {
     setRoomId,
     setCurrentUser,
   } = useChatContext();
-   console.log(roomId);
-   console.log(currentUser);
-   console.log(connected);
+  //  console.log(roomId);
+  //  console.log(currentUser);
+  //  console.log(connected);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,7 +41,7 @@ const ChatPage = () => {
     async function loadMessages() {
       try {
         const messages = await getMessagess(roomId);
-        // console.log(messages);
+        console.log(messages);
         setMessages(messages);
       } catch (error) {}
     }
@@ -101,17 +101,14 @@ const ChatPage = () => {
       console.log(input);
 
       const message = {
-        sender: currentUser,
-        content: input,
-        roomId: roomId,
-      };
+        sender:currentUser,
+        content:input,
+        roomId:roomId
+      }
 
-      stompClient.send(
-        `/app/sendMessage/${roomId}`,
-        {},
-        JSON.stringify(message)
-      );
-      setInput("");
+      stompClient.send(`/app/sendMessage/${roomId}`,{},
+        JSON.stringify(message));
+
     }
 
     //
@@ -214,6 +211,13 @@ const ChatPage = () => {
               className="dark:bg-green-600 h-10 w-10  flex   justify-center items-center rounded-full"
             >
               <MdSend size={20} />
+            </button>
+
+            {/* This is MIC Button */}
+            <button
+              className="dark:bg-green-600 h-10 w-10  flex   justify-center items-center rounded-full"
+            >
+              <MdMic size={20} />
             </button>
           </div>
         </div>
