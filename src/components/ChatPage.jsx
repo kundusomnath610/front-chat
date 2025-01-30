@@ -17,9 +17,6 @@ const ChatPage = () => {
     setRoomId,
     setCurrentUser,
   } = useChatContext();
-  //  console.log(roomId);
-  //  console.log(currentUser);
-  //  console.log(connected);
 
   const navigate = useNavigate();
   useEffect(() => {
